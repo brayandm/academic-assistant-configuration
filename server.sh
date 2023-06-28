@@ -58,11 +58,11 @@ cd /home/github-runner/engine
 ./svc.sh install github-runner
 sudo ./svc.sh start
 
-su - github-runner -c "mkdir engine"
-su - github-runner -c "cd engine && curl -o actions-runner-linux-x64-2.304.0.tar.gz -L https://github.com/actions/runner/releases/download/v2.304.0/actions-runner-linux-x64-2.304.0.tar.gz"
-su - github-runner -c "cd engine && echo "292e8770bdeafca135c2c06cd5426f9dda49a775568f45fcc25cc2b576afc12f  actions-runner-linux-x64-2.304.0.tar.gz" | shasum -a 256 -c"
-su - github-runner -c "cd engine && tar xzf ./actions-runner-linux-x64-2.304.0.tar.gz"
-su - github-runner -c "cd engine && ./config.sh --url $SCRIPT_ENV_RUNNER_URL_ENGINE --token $SCRIPT_ENV_RUNNER_TOKEN_ENGINE --unattended"
-cd /home/github-runner/engine
+su - github-runner -c "mkdir streamer"
+su - github-runner -c "cd streamer && curl -o actions-runner-linux-x64-2.304.0.tar.gz -L https://github.com/actions/runner/releases/download/v2.304.0/actions-runner-linux-x64-2.304.0.tar.gz"
+su - github-runner -c "cd streamer && echo "292e8770bdeafca135c2c06cd5426f9dda49a775568f45fcc25cc2b576afc12f  actions-runner-linux-x64-2.304.0.tar.gz" | shasum -a 256 -c"
+su - github-runner -c "cd streamer && tar xzf ./actions-runner-linux-x64-2.304.0.tar.gz"
+su - github-runner -c "cd streamer && ./config.sh --url $SCRIPT_ENV_RUNNER_URL_STREAMER --token $SCRIPT_ENV_RUNNER_TOKEN_STREAMER --unattended"
+cd /home/github-runner/streamer
 ./svc.sh install github-runner
 sudo ./svc.sh start
