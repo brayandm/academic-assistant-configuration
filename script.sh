@@ -3,8 +3,21 @@
 #Setting environment variables
 source .env
 
-if [ "$variable" = "root" ]; then
-    # Código a ejecutar si la variable es igual a "root"
+if [ "$SCRIPT_ENV_SERVER_USER" = "root" ]; then
+    #Copying the environment variables to the server
+    scp .env $SCRIPT_ENV_SERVER_USER@$SCRIPT_ENV_SERVER_IP:/root/
+
+    #Copying the script to the server
+    scp server.sh $SCRIPT_ENV_SERVER_USER@$SCRIPT_ENV_SERVER_IP:/root/
+
+    #Running the script on the server
+    ssh $SCRIPT_ENV_SERVER_USER@$SCRIPT_ENV_SERVER_IP "bash server.sh"
+
+    #Deleting the script from the server
+    ssh $SCRIPT_ENV_SERVER_USER@$SCRIPT_ENV_SERVER_IP "rm server.sh"
+
+    #Deleting the environment variables from the server
+    ssh $SCRIPT_ENV_SERVER_USER@$SCRIPT_ENV_SERVER_IP "rm .env"
 else
     #Copying the environment variables to the server
     scp .env $SCRIPT_ENV_SERVER_USER@$SCRIPT_ENV_SERVER_IP:~
