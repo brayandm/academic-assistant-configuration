@@ -6,6 +6,14 @@ source .env
 #Updating the packages
 apt-get update
 
+#Making swap space
+sudo fallocate -l $SCRIPT_ENV_SWAP_SIZE /swapfile
+sudo chmod 600 /swapfile
+sudo mkswap /swapfile
+sudo swapon /swapfile
+sudo cp /etc/fstab /etc/fstab.bak
+echo '/swapfile none swap sw 0 0' | sudo tee -a /etc/fstab
+
 #Installing docker engine
 sudo apt-get -y remove docker docker-engine docker.io containerd runc
 sudo apt-get -y update
